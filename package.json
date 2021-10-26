@@ -1,0 +1,22 @@
+{
+  "name": "fa_ecommerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GuilhermeFA00/FA_Ecommerce.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GuilhermeFA00/FA_Ecommerce/issues"
+  },
+  "homepage": "https://github.com/GuilhermeFA00/FA_Ecommerce#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
