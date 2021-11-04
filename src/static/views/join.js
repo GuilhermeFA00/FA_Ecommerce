@@ -37,7 +37,7 @@ export default class extends absview {
             <small></small>
           </div>
 
-          <h3><a href="#">Already account?</a></h3>
+          <h3><a href="/login" data-link>Already account?</a></h3>
           <input type="submit" class="submitBtn" value="Sign up">
         </form>
         </div>

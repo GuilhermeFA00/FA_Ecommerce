@@ -1,6 +1,7 @@
 import join from "./views/join.js";
 import products from "./views/products.js";
 import contact from "./views/contact.js";
+import app from "./views/app.js";
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
@@ -20,10 +21,10 @@ const navigateTo = url => {
 
 const router = async () => {
     const routes = [
-        { path: "/", view: () => console.log("/") },
+        { path: "/", view: app },
         { path: "/products", view: products },
         { path: "/contacts", view: contact },
-        { path: "/join", view: join },
+        { path: "/join", view: join }
     ]
 
     const potentialMatches = routes.map(route => {
@@ -44,7 +45,7 @@ const router = async () => {
 
     const view = new match.route.view(getParams(match));
 
-    document.querySelector('.header-container').innerHTML = await view.getHtml();
+    document.querySelector('.app').innerHTML = await view.getHtml();
     view.signUp();
 };
 
