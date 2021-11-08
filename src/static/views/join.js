@@ -68,7 +68,7 @@ export default class extends absview {
             errorAlert.textContent = message;
         }
 
-        function disableErrror(input) {
+        function disableError(input) {
             const formField = input.parentElement;
 
             const errorAlert = formField.querySelector('small');
@@ -85,7 +85,7 @@ export default class extends absview {
                 email: ''
             }
 
-            listUser = JSON.parse(localStorage.getItem('listUser'));
+            listUser = JSON.parse(localStorage.getItem('listUser') || '[]');
 
             listUser.forEach((item) => {
                 if (emailInput.value == item.emailUser) {
@@ -102,9 +102,8 @@ export default class extends absview {
                 showError(emailInput, "Enderço inválido");
             } else if (emailInput.value == userValid.email) {
                 showError(emailInput, "Email já cadastrado");
-            }
-            else {
-                errorDisable(emailInput);
+            } else {
+                disableError(emailInput);
                 valid = true;
             }
             return valid;
@@ -123,7 +122,7 @@ export default class extends absview {
                 user: ''
             }
 
-            listUser = JSON.parse(localStorage.getItem('listUser'));
+            listUser = JSON.parse(localStorage.getItem('listUser') || '[]');
 
             listUser.forEach((item) => {
                 if (usernameInput.value == item.userName) {
@@ -139,9 +138,9 @@ export default class extends absview {
             } else if (!isBetween(username.length, min, max)) {
                 showError(usernameInput, `Sua entrada deve ter no mínimo ${min} caracteres e no máximo ${max} caracteres`);
             } else if (usernameInput.value == userValid.user) {
-                showError(formUser, "Usuário já cadastrado");
+                showError(usernameInput, "Usuário já cadastrado");
             } else {
-                disableErrror(usernameInput);
+                disableError(usernameInput);
                 valid = true;
             }
             return valid;
@@ -158,7 +157,7 @@ export default class extends absview {
             } else if (!isBetween(password.length, min, max)) {
                 showError(passwordInput, "Sua senha deve ter no mínimo 8 caracteres e no máximo 16");
             } else {
-                errorDisable(passwordInput);
+                disableError(passwordInput);
                 valid = true;
             }
             return valid;
@@ -174,7 +173,7 @@ export default class extends absview {
             } else if (confirmPassword !== password) {
                 showError(confirmpassInput, "As senhas não estão iguais");
             } else {
-                errorDisable(confirmpassInput);
+                disableError(confirmpassInput);
                 valid = true;
             }
             return valid;
@@ -183,16 +182,15 @@ export default class extends absview {
         form.addEventListener('submit', e => {
             e.preventDefault();
 
+            let usernameValid = checkUsername();
+            let emailValid = checkEmail();
+            let passwordValid = checkPassword();
+            let confirmPassValid = checkConfirmpass();
 
-            let usernameValid = checkUsername(),
-                emailValid = checkEmail(),
-                passwordValid = checkPassword(),
-                confirmPassValid = checkConfirmpass()
-
-            let formValid = emailValid && usernameValid && passwordValid && confirmPassValid;
+            let formValid = usernameValid && emailValid && passwordValid && confirmPassValid;
 
             if (formValid) {
-                let listUser = JSON.parse(localStorage.getItem('listUser') || []);
+                let listUser = JSON.parse(localStorage.getItem('listUser') || '[]');
 
                 listUser.push(
                     {
