@@ -124,6 +124,11 @@ export default class extends absview {
 
                     localStorage.setItem('token', token)
                     localStorage.setItem('userEnter', JSON.stringify(userValid))
+
+                    setTimeout(() => {
+                        window.location.href = "/";
+                    }, 3000);
+
                 } else {
                     let errorAlert = document.querySelector('.signupFrm h3');
                     let updateHTML = `

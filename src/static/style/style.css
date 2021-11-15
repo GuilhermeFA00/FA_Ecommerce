@@ -588,6 +588,11 @@ svg {
 
 /* --- ASIDE SECTION --- */
 .user-navbar {
+  display: none;
+  padding: 6.25rem 2.5rem;
+}
+
+.user-navbar-postLogin {
   padding: 6.25rem 2.5rem;
 }
 

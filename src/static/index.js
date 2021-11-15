@@ -55,6 +55,9 @@ const router = async () => {
     if (match.route.path == "/login") {
         view.userLogin();
     }
+    if (match.route.path == "/") {
+        view.mainPage_interactions();
+    }
 
 };
 

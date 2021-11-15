@@ -202,6 +202,10 @@ export default class extends absview {
                 )
 
                 localStorage.setItem('listUser', JSON.stringify(listUser));
+
+                setTimeout(() => {
+                    window.location.href = "/login";
+                }, 3000);
             }
         });
     }
