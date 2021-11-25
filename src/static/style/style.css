@@ -899,3 +899,11 @@ svg {
 .input:focus {
   border: 2px solid purple;
 }
+
+/*Products*/
+.products-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+/*Products*/

@@ -57,8 +57,15 @@ const router = async () => {
     }
     if (match.route.path == "/") {
         view.mainPage_interactions();
-    }
 
+        let userEnter = JSON.parse(localStorage.getItem('userEnter'));
+        if (userEnter !== null) {
+            alert("User loged")
+        }
+    }
+    if (match.route.path == "/products") {
+        view.productsEvents();
+    }
 };
 
 window.addEventListener("popstate", router);

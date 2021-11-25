@@ -48,39 +48,12 @@ export default class extends absview {
         <section id="main-section" class="main-section container-full mx-auto d-flex">
             <article class="product-showcase h-100 border-right-light">
                 <section class="product-selected w-100 d-flex">
-                    <div class="product-preview">
-                        <div class="product-presentation d-flex">
-                            <div class="product-display d-flex align-items-center position-relative">
-                                <div class="product-height d-flex align-items-center">
-                                    <p class="h-100">74cm</p>
-                                    <div class="line position-relative">
-                                        <div class="line-top position-absolute"></div>
-                                        <div class="line-center"></div>
-                                        <div class="line-bottom position-absolute"></div>
-                                    </div>
-                                </div>
-                                <!-- https://i.ibb.co/C9hkdD7/sofa.png -->
-                                <img src="" class="product-photo" />
-                                <a href="#"
-                                    class="features-btn rounded-circle d-flex align-items-center justify-content-center position-absolute">
-                                    <svg class="rounded-circle" xmlns="http://www.w3.org/2000/svg" height="16"
-                                        viewBox="0 0 24 24" width="16">
-                                        <path d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-                                    </svg>
-                                    <span class="ripple rounded-circle border-white"></span>
-                                    <span class="ripple rounded-circle border-white"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="product-description">
                         <div class="product-summary-container">
-                            <h5 class="product-model">MODEL</h5>
-                            <h1 class="product-type">TYPE</h1>
+                            <h5 class="product-model">F A</h5>
+                            <h1 class="product-type">Parts&Machines</h1>
                             <p class="product-text-description">
-                                DESCRIPTION <a href="#">View More</a>
+                                FA-ECOMMERCE <a href="#">View More</a>
                             </p>
                         </div>
                         <div class="product-options d-flex align-items-center">
@@ -90,15 +63,15 @@ export default class extends absview {
                                     <path
                                         d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
                                 </svg>
-                                FEATURE PART
+                                DELIVERY
                             </a>
-                            <a href="#" class="option-btn d-flex align-items-center border-light">
+                            <a href="/products" class="option-btn d-flex align-items-center border-light">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
                                     <path d="M0 0h24v24H0z" fill="none" />
                                     <path
                                         d="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z" />
                                 </svg>
-                                FEATURE PART
+                                PRODUCTS
                             </a>
                             <a href="#" class="option-btn d-flex align-items-center border-light">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -106,22 +79,8 @@ export default class extends absview {
                                     <path
                                         d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H3V8h2v4h2V8h2v4h2V8h2v4h2V8h2v4h2V8h2v8z" />
                                 </svg>
-                                FEATURE PART
+                                DEVELOPMENT
                             </a>
-                        </div>
-
-                        <div class="product-price d-flex align-items-center">
-                            <h1 class="price">PRICE</h1>
-                            <button class="add-cart-btn rounded-pill d-flex align-items-center justify-content-between">
-                                Add to cart<span
-                                    class="features-btn rounded-circle d-flex align-items-center justify-content-center">
-                                    <svg class="rounded-circle" xmlns="http://www.w3.org/2000/svg" height="16"
-                                        viewBox="0 0 24 24" width="16">
-                                        <path d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-                                    </svg>
-                                </span>
-                            </button>
                         </div>
                     </div>
 

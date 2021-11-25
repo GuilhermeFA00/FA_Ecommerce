@@ -117,8 +117,6 @@ export default class extends absview {
                 });
 
                 if (emailInput.value == userValid.email && passwordInput.value == userValid.pw) {
-                    alert("Ok");
-
                     let mathRandom = Math.random().toString(16).substr(2)
                     let token = mathRandom + mathRandom
 
