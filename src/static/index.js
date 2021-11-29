@@ -60,11 +60,11 @@ const router = async () => {
 
         let userEnter = JSON.parse(localStorage.getItem('userEnter'));
         if (userEnter !== null) {
-            alert("User loged")
+            view.renderUser_profile();
         }
     }
     if (match.route.path == "/products") {
-        view.productsEvents();
+        await view.productsEvents();
     }
 };
 

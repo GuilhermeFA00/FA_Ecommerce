@@ -520,4 +520,11 @@ export default class extends absview {
             document.location.href = "/products";
         })
     }
+
+    renderUser_profile() {
+        const userProfile = document.querySelector('.user-navbar');
+
+        userProfile.classList.toggle('user-navbar-postLogin');
+        userProfile.classList.remove('user-navbar');
+    }
 }
