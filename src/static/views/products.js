@@ -8,6 +8,43 @@ export default class extends absview {
 
     async getHtml() {
         return `
+        <header class="header-container bg-light w-100 border-bottom-light">
+        <nav class="navbar d-flex align-items-center mx-auto">
+            <a class="navbar-logo d-flex align-items-center mr-auto" href="#">
+                <?xml version="1.0" encoding="UTF-8"?>
+                <h2>FA Ecommerce</h2>
+            </a>
+            <ul class="navbar-nav d-flex mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/" data-link>HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products" data-link>PRODUCTS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contacts" data-link>CONTACT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/join" data-link>JOIN</a>
+                </li>
+            </ul>
+            <div class="cart">
+            <button type="button" id="cart-btn">
+                <i class="fas fa-hat-cowboy-side" id="cart-shopping"></i>
+                <span id="cart-count-info"></span>
+            </button>
+
+            <div class="cart-container">
+                <div class="cart-list">
+                </div>
+
+                <div class="cart-total">
+                    <h3>Total: R$</h3>
+                    <span id="cart-total-value"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
         <section class="products">
             <div class="products-container">
             <div>
@@ -41,7 +78,7 @@ export default class extends absview {
                 <h2>Our Products</h2>
                 <div class="product-list">
                     <section id="product-suggestion" class="product-suggestion w-100">
-                        <div class="container-full d-flex justify-content-between mx-auto w-100">
+                        <div class="list-for-buy container-full d-flex justify-content-between mx-auto w-100">
                         <!---->
                         </div>
                     </section>
@@ -51,14 +88,27 @@ export default class extends absview {
         `
     }
     async productsEvents() {
+        const cartBtn = document.getElementById('cart-btn');
+        const cartContainer = document.querySelector('.cart-container');
+        const productsList = document.querySelector('.container-full');
+        const addCartBtn = document.querySelectorAll('.add-cart-btn');
+        const closeBtn = document.querySelector('.ant-drawer-close');
+        const message = document.querySelector('.ant-drawer-body');
+        let userEnter = JSON.parse(localStorage.getItem('userEnter'));
         renderProducts();
+        cartRender();
 
         window.addEventListener('DOMContentLoaded', () => {
             noLogin();
         });
 
+        function cartRender() {
+            cartBtn.addEventListener('click', () => {
+                cartContainer.classList.toggle('show-cart-container');
+            });
+        }
+
         function renderProducts() {
-            const productsList = document.querySelector('.container-full');
             let newHTML;
 
             let products = [
@@ -86,9 +136,9 @@ export default class extends absview {
                 newHTML += `   
                     <div class="product-suggestion-showcase d-flex align-items-center">
                         <div class="suggestion-card h-100 bg-light d-flex column border-light position-relative">
-                            <img src="${product.info.imgSrc}">
-                            <h2>${product.info.name}</h2>
-                            <h5>${product.info.brand}</h5>
+                            <img class="product-img" src="${product.info.imgSrc}">
+                            <h2 class="product-name">${product.info.name}</h2>
+                            <h5 class="product-brand>${product.info.brand}</h5>
                             <h3 class="price">$${product.info.price}</h3>
                             <button class="add-cart-btn rounded-pill d-flex align-items-center justify-content-between">
                                 Add to cart<span class="features-btn rounded-circle d-flex align-items-center justify-content-center">
@@ -106,11 +156,6 @@ export default class extends absview {
             });
         }
         function noLogin() {
-            const addCartBtn = document.querySelectorAll('.add-cart-btn');
-            const closeBtn = document.querySelector('.ant-drawer-close');
-            const message = document.querySelector('.ant-drawer-body');
-            let userEnter = JSON.parse(localStorage.getItem('userEnter'));
-
             addCartBtn.forEach(btn => {
                 btn.addEventListener('click', () => {
                     if (userEnter === null) {
@@ -139,9 +184,62 @@ export default class extends absview {
                 msgDiv.innerHTML = "";
             });
         }
+    }
 
-        function buyProducts() {
+    buyProducts() {
+        const productsList = document.querySelector('.product-list');
+        const cartList = document.querySelector('.cart-list');
+        productsEvents();
 
+        function productsEvents() {
+            window.addEventListener('DOMContentLoaded', () => {
+                loadCart();
+            });
+
+            //productsList.addEventListener('click', purchaseProduct);
+            document.querySelector('.add-cart-btn').addEventListener('click', getProductInfo(productsList));
+        }
+
+        function addToCartList(product) {
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <div class="suggestion-card h-100 bg-light d-flex column border-light position-relative">
+                <h2 class="product-name">${product.name}</h2>
+                <h5 class="product-brand>${product.brand}</h5>
+                <h3 class="price">$${product.price}</h3>
+                <button type="button" class="cart-item-del-btn">
+                <i class="fas fa-times"></i>
+                </button>
+                </div>
+                `;
+            cartList.appendChild(cartItem);
+        }
+
+        function getProductInfo(product) {
+            let productInfo = {
+                imgSrc: product.querySelector('.product-img img').src,
+                name: product.querySelector('.product-name').textContent,
+                brand: product.querySelector('.product-brand').textContent,
+                price: product.querySelector('.price').textContent
+            }
+            addToCartList(productInfo);
+            saveProductInStrg(productInfo);
+        }
+
+        function loadCart() {
+            let products = getProductFromStrg();
+            products.forEach(product => addToCartList(product));
+        }
+
+        function saveProductInStrg(item) {
+            let products = getProductFromStrg();
+            products.push(item);
+            localStorage.setItem('products', JSON.stringify(products));
+        }
+
+        function getProductFromStrg() {
+            return localStorage.getItem('products') ? JSON.parse(localStorage.getItem('products')) : [];//If the key does not exist, an empty array will be added.
         }
     }
 }

@@ -65,6 +65,7 @@ const router = async () => {
     }
     if (match.route.path == "/products") {
         await view.productsEvents();
+        view.buyProducts();
     }
 };
 
