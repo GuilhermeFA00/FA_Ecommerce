@@ -76,10 +76,40 @@ export default class extends absview {
                     </div>
                 </div>
                 <h2>Our Products</h2>
-                <div class="product-list">
+                <div class="producttt-list">
                     <section id="product-suggestion" class="product-suggestion w-100">
                         <div class="list-for-buy container-full d-flex justify-content-between mx-auto w-100">
-                        <!---->
+                        <div class="product-suggestion-showcase d-flex align-items-center">
+                        <div class="suggestion-card h-100 bg-light d-flex column border-light position-relative">
+                            <img class="product-img" src="https://i.ibb.co/Db3smwL/similar1.jpg">
+                            <h2 class="product-name">Serving Bowl</h2>
+                            <h5 class="product-brand">Stockholm 2020</h5>
+                            <h3 class="price">12</h3>
+                            <button class="add-cart-btn rounded-pill d-flex align-items-center justify-content-between">
+                                Add to cart<span class="features-btn rounded-circle d-flex align-items-center justify-content-center">
+                                    <svg class="rounded-circle" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16">
+                                        <path d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                        </div>
+                        <div class="product-suggestion-showcase d-flex align-items-center">
+                        <div class="suggestion-card h-100 bg-light d-flex column border-light position-relative">
+                            <img class="product-img" src="https://i.ibb.co/Db3smwL/similar1.jpg">
+                            <h2 class="product-name">Hello</h2>
+                            <h5 class="product-brand">Stockholm 2020</h5>
+                            <h3 class="price">12</h3>
+                            <button class="add-cart-btn rounded-pill d-flex align-items-center justify-content-between">
+                                Add to cart<span class="features-btn rounded-circle d-flex align-items-center justify-content-center">
+                                    <svg class="rounded-circle" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16">
+                                        <path d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
                         </div>
                     </section>
                 </div>
@@ -87,18 +117,22 @@ export default class extends absview {
         </section>
         `
     }
+
     async productsEvents() {
         const cartBtn = document.getElementById('cart-btn');
         const cartContainer = document.querySelector('.cart-container');
+        const cartList = document.querySelector('.cart-list');
         const productsList = document.querySelector('.container-full');
+        const products = document.querySelectorAll('.product-suggestion-showcase');
         const addCartBtn = document.querySelectorAll('.add-cart-btn');
         const closeBtn = document.querySelector('.ant-drawer-close');
         const message = document.querySelector('.ant-drawer-body');
         let userEnter = JSON.parse(localStorage.getItem('userEnter'));
-        renderProducts();
+
         cartRender();
 
         window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
             noLogin();
         });
 
@@ -109,52 +143,52 @@ export default class extends absview {
         }
 
         function renderProducts() {
-            let newHTML;
+            let productsInCart = JSON.parse(localStorage.getItem('shoppingCart'));
+            if (!productsInCart) {
+                productsInCart = [];
+            }
 
-            let products = [
-                {
-                    name: "Serving Bowl",
-                    price: 12,
-                    brand: "Stockholm 2020",
-                    imgSrc: "https://i.ibb.co/Db3smwL/similar1.jpg"
-                },
-                {
-                    name: "Lampad",
-                    price: 24,
-                    brand: "Stockholm 2021",
-                    imgSrc: "https://i.ibb.co/wSQVJyb/similar2.jpg"
+            function updateCartList() {
+                localStorage.setItem('shoppingCart', JSON.stringify(productsInCart));
+                if (productsInCart.length > 0) {
+                    let result = productsInCart.map(product => {
+                        return `
+                        <img class="product-img" src="${product.image}">
+                        <h2 class="product-name">${product.name}</h2>
+                        <h5 class="product-brand">${product.brand}</h5>
+                        <h3 class="price">${product.price}</h3>
+                           `
+                    });
+                    cartList.innerHTML = result.join('');
                 }
-            ]
+            }
 
-            const infoProducts = products.map(info => {
-                return {
-                    info: info
-                }
+            function updateProductsInfos(product) {
+                productsInCart.push(product);
+            }
+
+            products.forEach(item => {
+                item.addEventListener('click', e => {
+                    if (e.target.classList.contains('add-cart-btn')) {
+                        const productName = item.querySelector('.product-name').innerHTML;
+                        const productPrice = item.querySelector('.price').innerHTML;
+                        const productBrand = item.querySelector('.product-brand').innerHTML;
+                        const productImage = item.querySelector('img').src;
+                        let product = {
+                            name: productName,
+                            price: productPrice,
+                            brand: productBrand,
+                            image: productImage
+                        }
+                        updateProductsInfos(product);
+                        updateCartList();
+                    }
+                });
             });
 
-            infoProducts.forEach(product => {
-                newHTML += `   
-                    <div class="product-suggestion-showcase d-flex align-items-center">
-                        <div class="suggestion-card h-100 bg-light d-flex column border-light position-relative">
-                            <img class="product-img" src="${product.info.imgSrc}">
-                            <h2 class="product-name">${product.info.name}</h2>
-                            <h5 class="product-brand>${product.info.brand}</h5>
-                            <h3 class="price">$${product.info.price}</h3>
-                            <button class="add-cart-btn rounded-pill d-flex align-items-center justify-content-between">
-                                Add to cart<span class="features-btn rounded-circle d-flex align-items-center justify-content-center">
-                                    <svg class="rounded-circle" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16">
-                                        <path d="M0 0h24v24H0z" fill="none"></path>
-                                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
-                                    </svg>
-                                </span>
-                            </button>
-                        </div>
-                    </div>            
-                `
-
-                productsList.innerHTML = newHTML;
-            });
+            updateCartList();
         }
+
         function noLogin() {
             addCartBtn.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -183,63 +217,6 @@ export default class extends absview {
                 let msgDiv = document.querySelector('.msg-body');
                 msgDiv.innerHTML = "";
             });
-        }
-    }
-
-    buyProducts() {
-        const productsList = document.querySelector('.product-list');
-        const cartList = document.querySelector('.cart-list');
-        productsEvents();
-
-        function productsEvents() {
-            window.addEventListener('DOMContentLoaded', () => {
-                loadCart();
-            });
-
-            //productsList.addEventListener('click', purchaseProduct);
-            document.querySelector('.add-cart-btn').addEventListener('click', getProductInfo(productsList));
-        }
-
-        function addToCartList(product) {
-            const cartItem = document.createElement('div');
-            cartItem.classList.add('cart-item');
-            cartItem.innerHTML = `
-                <div class="suggestion-card h-100 bg-light d-flex column border-light position-relative">
-                <h2 class="product-name">${product.name}</h2>
-                <h5 class="product-brand>${product.brand}</h5>
-                <h3 class="price">$${product.price}</h3>
-                <button type="button" class="cart-item-del-btn">
-                <i class="fas fa-times"></i>
-                </button>
-                </div>
-                `;
-            cartList.appendChild(cartItem);
-        }
-
-        function getProductInfo(product) {
-            let productInfo = {
-                imgSrc: product.querySelector('.product-img img').src,
-                name: product.querySelector('.product-name').textContent,
-                brand: product.querySelector('.product-brand').textContent,
-                price: product.querySelector('.price').textContent
-            }
-            addToCartList(productInfo);
-            saveProductInStrg(productInfo);
-        }
-
-        function loadCart() {
-            let products = getProductFromStrg();
-            products.forEach(product => addToCartList(product));
-        }
-
-        function saveProductInStrg(item) {
-            let products = getProductFromStrg();
-            products.push(item);
-            localStorage.setItem('products', JSON.stringify(products));
-        }
-
-        function getProductFromStrg() {
-            return localStorage.getItem('products') ? JSON.parse(localStorage.getItem('products')) : [];//If the key does not exist, an empty array will be added.
         }
     }
 }

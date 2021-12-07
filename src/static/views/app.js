@@ -227,91 +227,36 @@ export default class extends absview {
             </article>
 
             <aside class="user-navbar h-100">
-                <div class="user-avatar position-relative">
-                    <img src="" class="rounded-circle" />
-                    <a href="#"
-                        class="item-quantity badge position-absolute rounded-circle d-flex align-items-center justify-content-center">2</a>
-                </div>
                 <h3 class="user-greeting">
-                    <span class="username">USER</span>
+                    <span class="username"></span>
                 </h3>
-                <div class="user-proposal">
-                    <h5 class="title">My Proposals</h5>
-                    <ul class="proposal-list">
-                        <li class="nav-item d-flex align-items-center justify-content-between selected">
-                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="20"
-                                viewBox="0 0 24 24" width="20">
-                                <g>
-                                    <rect fill="none" height="24" width="24" x="0" />
-                                </g>
-                                <g>
-                                    <g>
-                                        <g>
-                                            <path
-                                                d="M4,18v3h3v-3h10v3h3v-6H4V18z M19,10h3v3h-3V10z M2,10h3v3H2V10z M17,13H7V5c0-1.1,0.9-2,2-2h6c1.1,0,2,0.9,2,2V13z" />
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
-                            <a href="#" class="nav-link">Sofa Stockholm</a>
-                        </li>
-                        <li class="nav-item d-flex align-items-center justify-content-between">
-                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="20"
-                                viewBox="0 0 24 24" width="20">
-                                <g>
-                                    <rect fill="none" height="24" width="24" />
-                                    <path
-                                        d="M21,10c-1.1,0-2,0.9-2,2v3H5v-3c0-1.1-0.89-2-2-2s-2,0.9-2,2v5c0,1.1,0.9,2,2,2h18c1.1,0,2-0.9,2-2v-5 C23,10.9,22.1,10,21,10z M18,5H6C4.9,5,4,5.9,4,7v2.15c1.16,0.41,2,1.52,2,2.81V14h12v-2.03c0-1.3,0.84-2.4,2-2.81V7 C20,5.9,19.1,5,18,5z" />
-                                </g>
-                            </svg>
-                            <a href="#" class="nav-link">Sofa Reactive</a>
-                        </li>
-                    </ul>
-                </div>
                 <div class="user-choice">
-                    <h5 class="title">My Choices</h5>
+                    <h5 class="title">My Purchases</h5>
+                    <div class="cart">
+                    <button type="button" id="cart-btn">
+                        <i class="fas fa-hat-cowboy-side" id="cart-shopping"></i>
+                        <span id="cart-count-info"></span>
+                    </button>
+
+                    <div class="cart-container">
+                        <div class="cart-list">
+                        </div>
+
+                        <div class="cart-total">
+                            <h3>Total: R$</h3>
+                            <span id="cart-total-value"></span>
+                        </div>
+                    </div>
+                </div>
                     <ul class="choice-list">
-                        <li class="nav-item d-flex align-items-center justify-content-between border-bottom-light">
-                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="20"
-                                viewBox="0 0 24 24" width="20">
-                                <g>
-                                    <rect fill="none" height="24" width="24" x="0" />
-                                </g>
-                                <g>
-                                    <g>
-                                        <g>
-                                            <path
-                                                d="M4,18v3h3v-3h10v3h3v-6H4V18z M19,10h3v3h-3V10z M2,10h3v3H2V10z M17,13H7V5c0-1.1,0.9-2,2-2h6c1.1,0,2,0.9,2,2V13z" />
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
-                            <a href="#" class="nav-link">Armchairs</a>
-                            <a href="#" class="nav-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20">
-                                    <path d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
-                                </svg>
-                            </a>
-                        </li>
                         <li class="nav-item d-flex align-items-center justify-content-between">
-                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="20"
-                                viewBox="0 0 24 24" width="20">
-                                <g>
-                                    <rect fill="none" height="24" width="24" />
-                                    <path
-                                        d="M21,10c-1.1,0-2,0.9-2,2v3H5v-3c0-1.1-0.89-2-2-2s-2,0.9-2,2v5c0,1.1,0.9,2,2,2h18c1.1,0,2-0.9,2-2v-5 C23,10.9,22.1,10,21,10z M18,5H6C4.9,5,4,5.9,4,7v2.15c1.16,0.41,2,1.52,2,2.81V14h12v-2.03c0-1.3,0.84-2.4,2-2.81V7 C20,5.9,19.1,5,18,5z" />
-                                </g>
+                            <!--                            <a href="#" class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20">
+                                <path d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
                             </svg>
-                            <a href="#" class="nav-link">Fairly Big</a>
-                            <a href="#" class="nav-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20">
-                                    <path d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
-                                </svg>
-                            </a>
+                        </a>-->
                         </li>
                     </ul>
                 </div>
