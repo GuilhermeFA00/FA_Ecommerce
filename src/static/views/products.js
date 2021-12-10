@@ -39,7 +39,7 @@ export default class extends absview {
                 </div>
 
                 <div class="cart-total">
-                    <h3>Total: R$</h3>
+                    <h3 id="sum-prices"></h3>
                     <span id="cart-total-value"></span>
                 </div>
             </div>
@@ -78,15 +78,15 @@ export default class extends absview {
                 <h2>Our Products</h2>
                 <div class="producttt-list">
                     <section id="product-suggestion" class="product-suggestion w-100">
-                        <div class="list-for-buy container-full d-flex justify-content-between mx-auto w-100">
+                        <div class="list-for-buy container-full d-flex  mx-auto w-100">
                         <div class="product-suggestion-showcase d-flex align-items-center">
                         <div class="suggestion-card h-100 bg-light d-flex column border-light position-relative">
                             <img class="product-img" src="https://i.ibb.co/Db3smwL/similar1.jpg">
                             <h2 class="product-name">Serving Bowl</h2>
                             <h5 class="product-brand">Stockholm 2020</h5>
-                            <h3 class="price">12</h3>
-                            <button class="add-cart-btn rounded-pill d-flex align-items-center justify-content-between">
-                                Add to cart<span class="features-btn rounded-circle d-flex align-items-center justify-content-center">
+                            R$<span class="price">12</span>
+                            <button class="add-cart-btn rounded-pill d-flex align-items-center justify-content-between" data-product-id="1">
+                                Add to cart<span class="features-btn rounded-circle d-flex align-items-center justify-content-center" data-product-id="1">
                                     <svg class="rounded-circle" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16">
                                         <path d="M0 0h24v24H0z" fill="none"></path>
                                         <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
@@ -97,12 +97,12 @@ export default class extends absview {
                         </div>
                         <div class="product-suggestion-showcase d-flex align-items-center">
                         <div class="suggestion-card h-100 bg-light d-flex column border-light position-relative">
-                            <img class="product-img" src="https://i.ibb.co/Db3smwL/similar1.jpg">
-                            <h2 class="product-name">Hello</h2>
-                            <h5 class="product-brand">Stockholm 2020</h5>
-                            <h3 class="price">12</h3>
-                            <button class="add-cart-btn rounded-pill d-flex align-items-center justify-content-between">
-                                Add to cart<span class="features-btn rounded-circle d-flex align-items-center justify-content-center">
+                            <img class="product-img" src="https://i.ibb.co/wSQVJyb/similar2.jpg">
+                            <h2 class="product-name">Pendent Lampad</h2>
+                            <h5 class="product-brand">Stockholm 2021</h5>
+                            R$<span class="price">24</span>
+                            <button class="add-cart-btn rounded-pill d-flex align-items-center justify-content-between" data-product-id="2">
+                                Add to cart<span class="features-btn rounded-circle d-flex align-items-center justify-content-center" data-product-id="2">
                                     <svg class="rounded-circle" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16">
                                         <path d="M0 0h24v24H0z" fill="none"></path>
                                         <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
@@ -122,19 +122,18 @@ export default class extends absview {
         const cartBtn = document.getElementById('cart-btn');
         const cartContainer = document.querySelector('.cart-container');
         const cartList = document.querySelector('.cart-list');
-        const productsList = document.querySelector('.container-full');
+        const cartSumPrice = document.querySelector('#sum-prices');
         const products = document.querySelectorAll('.product-suggestion-showcase');
         const addCartBtn = document.querySelectorAll('.add-cart-btn');
         const closeBtn = document.querySelector('.ant-drawer-close');
         const message = document.querySelector('.ant-drawer-body');
         let userEnter = JSON.parse(localStorage.getItem('userEnter'));
 
+        if (userEnter != null) {
+            buyProducts();
+        }
         cartRender();
-
-        window.addEventListener('DOMContentLoaded', () => {
-            renderProducts();
-            noLogin();
-        });
+        noLogin();
 
         function cartRender() {
             cartBtn.addEventListener('click', () => {
@@ -142,10 +141,18 @@ export default class extends absview {
             });
         }
 
-        function renderProducts() {
+        function buyProducts() {
             let productsInCart = JSON.parse(localStorage.getItem('shoppingCart'));
             if (!productsInCart) {
                 productsInCart = [];
+            }
+
+            const countTheSumPrice = function () {
+                let sum = 0;
+                productsInCart.forEach(item => {
+                    sum += item.price;
+                });
+                return sum;
             }
 
             function updateCartList() {
@@ -153,30 +160,43 @@ export default class extends absview {
                 if (productsInCart.length > 0) {
                     let result = productsInCart.map(product => {
                         return `
-                        <img class="product-img" src="${product.image}">
+                        <div>
+                        <img class="product-img" src="${product.image}" height="345px" width="355px">
                         <h2 class="product-name">${product.name}</h2>
                         <h5 class="product-brand">${product.brand}</h5>
-                        <h3 class="price">${product.price}</h3>
+                        <h3 class="price">R$${product.price}</h3>
+                        <i class="fas fa-times"></i>
+                        </div>
                            `
                     });
                     cartList.innerHTML = result.join('');
+                    cartSumPrice.innerHTML = 'R$' + countTheSumPrice();
                 }
             }
 
             function updateProductsInfos(product) {
+                /*for (let i = 0; i < productsInCart.length; i++) {
+                    if (productsInCart[i].id == product.id) {
+                        productsInCart[i].count += 1;
+                        return;
+                    }
+                }*/
                 productsInCart.push(product);
             }
 
             products.forEach(item => {
                 item.addEventListener('click', e => {
                     if (e.target.classList.contains('add-cart-btn')) {
+                        const productID = e.target.dataset.productId;
                         const productName = item.querySelector('.product-name').innerHTML;
                         const productPrice = item.querySelector('.price').innerHTML;
                         const productBrand = item.querySelector('.product-brand').innerHTML;
                         const productImage = item.querySelector('img').src;
                         let product = {
+                            id: productID,
+                            count: 1,
                             name: productName,
-                            price: productPrice,
+                            price: +productPrice,
                             brand: productBrand,
                             image: productImage
                         }
@@ -186,13 +206,26 @@ export default class extends absview {
                 });
             });
 
+            function delProduct(event) {
+                let element;
+                if (event.target.tagName === "BUTTON") {
+                    element = event.target.parentElement;
+                    element.remove();
+                } else if (event.target.tagName === "I") {
+                    element = event.target.parentElement;
+                    element.remove();
+                }
+            }
+
             updateCartList();
+            cartList.addEventListener('click', delProduct);
         }
 
         function noLogin() {
             addCartBtn.forEach(btn => {
                 btn.addEventListener('click', () => {
                     if (userEnter === null) {
+                        document.querySelector('.header-container').style.removeProperty("position");
                         document.querySelector('.ant-drawer').classList.add('ant-drawer-open');
                         document.body.style.overflow = "hidden";
                         document.querySelector('.ant-drawer-content-wrapper').style.removeProperty("transform");
@@ -211,6 +244,8 @@ export default class extends absview {
             });
 
             closeBtn.addEventListener('click', () => {
+                //document.querySelector('.header-container').classList.remove('header-container-after-alert');
+                //document.querySelector('.header-container').classList.add('header-container');
                 document.querySelector('.ant-drawer').classList.remove('ant-drawer-open');
                 document.body.style.removeProperty("overflow");
                 document.querySelector('.ant-drawer-content-wrapper').style.transform = "translateX(100%)";
