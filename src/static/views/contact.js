@@ -8,13 +8,47 @@ export default class extends absview {
 
     async getHtml() {
         return `
-        <h1>Welcome back, Dom</h1>
-        <p>
-            Fugiat voluptate et nisi Lorem cillum anim sit do eiusmod occaecat irure do. Reprehenderit anim fugiat sint exercitation consequat. Sit anim laborum sit amet Lorem adipisicing ullamco duis. Anim in do magna ea pariatur et.
-        </p>
-        <p>
-            <a href="/posts" data-link>View recent posts</a>.
-        </p>
+        <div class="col-md-5 d-flex align-items-stretch">
+        <div class="info-wrap bg-primary w-100 p-lg-5 p-4">
+        <h3 class="mb-4 mt-md-4">Contact us</h3>
+        <div class="dbox w-100 d-flex align-items-start">
+        <div class="icon d-flex align-items-center justify-content-center">
+        <span class="fa fa-map-marker"></span>
+        </div>
+        <div class="text pl-3">
+        <p><span>Address:</span> Ceará,Brazil</p>
+        </div>
+        </div>
+        <div class="dbox w-100 d-flex align-items-center">
+        <div class="icon d-flex align-items-center justify-content-center">
+        <span class="fa fa-phone"></span>
+        </div>
+        <div class="text pl-3">
+        <p><span>Instagram:</span> <a href="https://www.instagram.com/guilherme_al00/">guilherme_al00</a></p>
+        </div>
+        </div>
+        <div class="dbox w-100 d-flex align-items-center">
+        <div class="icon d-flex align-items-center justify-content-center">
+        <span class="fa fa-paper-plane"></span>
+        </div>
+        <div class="text pl-3">
+        <p><span>Email:</span> <a href="sharkdevv@gmail.com">GMAIL</a></p>
+        </div>
+        </div>
+        <div class="dbox w-100 d-flex align-items-center">
+        <div class="icon d-flex align-items-center justify-content-center">
+        <span class="fa fa-globe"></span>
+        </div>
+        <div class="text pl-3">
+        <p><span>Gihub</span> <a href="https://github.com/GuilhermeFA00">GuilhermeFA00</a></p>
+        </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="contact-bottom">
+            <h1>FA Services</h1>
+        </div>
         `
     }
 }

@@ -85,8 +85,8 @@ export default class extends absview {
                             <h2 class="product-name">Serving Bowl</h2>
                             <h5 class="product-brand">Stockholm 2020</h5>
                             R$<span class="price">12</span>
-                            <button class="add-cart-btn rounded-pill d-flex align-items-center justify-content-between" data-product-id="1">
-                                Add to cart<span class="features-btn rounded-circle d-flex align-items-center justify-content-center" data-product-id="1">
+                            <button class="add-cart-btn rounded-pill d-flex align-items-center justify-content-between" data-id="1">
+                                Add to cart<span class="features-btn rounded-circle d-flex align-items-center justify-content-center" data-id="1">
                                     <svg class="rounded-circle" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16">
                                         <path d="M0 0h24v24H0z" fill="none"></path>
                                         <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
@@ -101,8 +101,8 @@ export default class extends absview {
                             <h2 class="product-name">Pendent Lampad</h2>
                             <h5 class="product-brand">Stockholm 2021</h5>
                             R$<span class="price">24</span>
-                            <button class="add-cart-btn rounded-pill d-flex align-items-center justify-content-between" data-product-id="2">
-                                Add to cart<span class="features-btn rounded-circle d-flex align-items-center justify-content-center" data-product-id="2">
+                            <button class="add-cart-btn rounded-pill d-flex align-items-center justify-content-between" data-id="2">
+                                Add to cart<span class="features-btn rounded-circle d-flex align-items-center justify-content-center" data-id="2">
                                     <svg class="rounded-circle" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16">
                                         <path d="M0 0h24v24H0z" fill="none"></path>
                                         <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
@@ -175,19 +175,44 @@ export default class extends absview {
             }
 
             function updateProductsInfos(product) {
-                /*for (let i = 0; i < productsInCart.length; i++) {
+                for (let i = 0; i < productsInCart.length; i++) {
                     if (productsInCart[i].id == product.id) {
                         productsInCart[i].count += 1;
+                        productsInCart[i].price = productsInCart[i].defaultPrice * productsInCart[i].count;
                         return;
                     }
-                }*/
+                }
                 productsInCart.push(product);
+            }
+
+            function delProduct(event) {
+                let element;
+                for (let i = 0; i < productsInCart.length; i++) {
+                    if (event.target.tagName === "BUTTON") {
+                        element = event.target.parentElement;
+                        element.remove();
+                        productsInCart[i].count -= 1;
+                        productsInCart[i].price = productsInCart[i].defaultPrice * productsInCart[i].count;
+                        if (productsInCart[i].count <= 0) {
+                            productsInCart.splice(i, 1);
+                        }
+                    } else if (event.target.tagName === "I") {
+                        element = event.target.parentElement;
+                        element.remove();
+                        productsInCart[i].count -= 1;
+                        productsInCart[i].price = productsInCart[i].defaultPrice * productsInCart[i].count;
+                        if (productsInCart[i].count <= 0) {
+                            productsInCart.splice(i, 1);
+                        }
+                    }
+                }
+                updateCartList();
             }
 
             products.forEach(item => {
                 item.addEventListener('click', e => {
                     if (e.target.classList.contains('add-cart-btn')) {
-                        const productID = e.target.dataset.productId;
+                        const productID = item.querySelector('button').getAttribute('data-id');
                         const productName = item.querySelector('.product-name').innerHTML;
                         const productPrice = item.querySelector('.price').innerHTML;
                         const productBrand = item.querySelector('.product-brand').innerHTML;
@@ -197,6 +222,7 @@ export default class extends absview {
                             count: 1,
                             name: productName,
                             price: +productPrice,
+                            defaultPrice: +productPrice,
                             brand: productBrand,
                             image: productImage
                         }
@@ -206,19 +232,8 @@ export default class extends absview {
                 });
             });
 
-            function delProduct(event) {
-                let element;
-                if (event.target.tagName === "BUTTON") {
-                    element = event.target.parentElement;
-                    element.remove();
-                } else if (event.target.tagName === "I") {
-                    element = event.target.parentElement;
-                    element.remove();
-                }
-            }
-
-            updateCartList();
             cartList.addEventListener('click', delProduct);
+            updateCartList();
         }
 
         function noLogin() {

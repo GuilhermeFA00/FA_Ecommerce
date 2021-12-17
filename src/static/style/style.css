@@ -690,9 +690,8 @@ svg {
   top: 15px;
   padding: 0.05rem 0.45rem;
   font-size: 1.4rem;
-  background: var(--emerald);
   border: none;
-  color: #fff;
+  color: rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -1134,7 +1133,7 @@ svg {
 }
 .ant-drawer-close {
   position: absolute;
-  top: 0;
+  top: 105;
   right: 0;
   z-index: 10;
   display: block;
@@ -1208,3 +1207,56 @@ svg:not(:root) {
   box-shadow: -2px 0 8px rgb(0 0 0 / 45%);
 }
 /*Products*/
+
+/*Contact*/
+.no-gutters > .col,
+.no-gutters > [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+.align-items-stretch {
+  -webkit-box-align: stretch !important;
+  -ms-flex-align: stretch !important;
+  align-items: stretch !important;
+}
+@media (min-width: 992px) {
+  .info-wrap {
+    margin-top: -20px;
+    margin-bottom: -20px;
+    border-radius: 5px;
+  }
+  .p-lg-5 {
+    padding: 3rem !important;
+  }
+}
+.bg-primary {
+  background: #1089ff !important;
+}
+.info-wrap h3 {
+  color: #fff;
+}
+@media (min-width: 768px) {
+  .mt-md-4,
+  .my-md-4 {
+    margin-top: 1.5rem !important;
+  }
+}
+.mb-4,
+.my-4 {
+  margin-bottom: 1.5rem !important;
+}
+.info-wrap .dbox {
+  width: 100%;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 25px;
+}
+.contact-bottom {
+  background: #bdbdbd;
+  height: 340px;
+}
+.contact-bottom h1 {
+  margin-top: 20px;
+  color: #1089ff;
+  opacity: 0.5;
+}
+/*Contact*/
